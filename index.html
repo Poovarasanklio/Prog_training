@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <style>
+    /* Add some basic styling for better presentation */
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: 20px auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .error {
+      color: #ff0000;
+      margin-bottom: 12px;
+    }
+
+    #thankYouMessage {
+      display: none;
+      color: #4caf50;
+      font-weight: bold;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Contact Us</h2>
+
+  <form id="contactForm" onsubmit="return validateForm()">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <p class="error" id="nameError"></p>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <p class="error" id="emailError"></p>
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" required>
+    <p class="error" id="phoneError"></p>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" rows="4" required></textarea>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <p id="thankYouMessage">Thank you for your submission!</p>
+
+  <script>
+    function validateForm() {
+      var name = document.getElementById("name");
+      var email = document.getElementById("email");
+      var phone = document.getElementById("phone");
+      var message = document.getElementById("message");
+
+      var nameError = document.getElementById("nameError");
+      var emailError = document.getElementById("emailError");
+      var phoneError = document.getElementById("phoneError");
+
+      var nameRegex = /^[a-zA-Z\s]+$/;
+      var emailRegex = /^\S+@\S+\.\S+$/;
+      var phoneRegex = /^\d{10}$/;
+
+      var isValid = true;
+
+      // Name validation
+      if (!nameRegex.test(name.value)) {
+        nameError.innerHTML = "Enter a valid name";
+        name.style.borderColor = "red";
+        isValid = false;
+      } else {
+        nameError.innerHTML = "";
+        name.style.borderColor = "";
+      }
+
+      // Email validation
+      if (!emailRegex.test(email.value)) {
+        emailError.innerHTML = "Enter a valid email address";
+        email.style.borderColor = "red";
+        isValid = false;
+      } else {
+        emailError.innerHTML = "";
+        email.style.borderColor = "";
+      }
+
+      // Phone validation
+      if (!phoneRegex.test(phone.value)) {
+        phoneError.innerHTML = "Enter a valid 10-digit phone number";
+        phone.style.borderColor = "red";
+        isValid = false;
+      } else {
+        phoneError.innerHTML = "";
+        phone.style.borderColor = "";
+      }
+
+      if (isValid) {
+        // Show thank you message and hide the form
+        document.getElementById("thankYouMessage").style.display = "block";
+        document.getElementById("contactForm").style.display = "none";
+      }
+
+      return false; // Prevents the form from submitting and refreshing the page
+    }
+  </script>
+
+</body>
+</html>
