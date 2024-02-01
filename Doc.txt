@@ -1,7 +1,0 @@
-Welcome too Kliotech..
-Second line typed make the file save in working directory and and staging ares it go to local commit
-!!!!!!
-last modified
-
-
-Here the programing code to be displayed yet to be maintained for everlasting view..
